@@ -56,6 +56,9 @@
     <Compile Include="Entities\EnemyLine.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Kinematic.cs" />
+    <Compile Include="Entities\Missiles\EnemyMissile.cs" />
+    <Compile Include="Entities\Missiles\Missile.cs" />
+    <Compile Include="Entities\Missiles\PlayerMissile.cs" />
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Renderable.cs" />
     <Compile Include="Game.cs" />
