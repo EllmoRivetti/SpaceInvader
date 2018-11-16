@@ -33,10 +33,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
                 Vecteur2D tempPos = n.TransformComponent.Position + movementVector * n.VelocityComponent.Velocity;
                 if (tempPos.x > RenderForm.instance.Width - n.RenderComponent.sprite.Width)
                 {
-                    Console.WriteLine("--------");
                     foreach (MoveEnemyNode no in listNode)
                     {
-                        Console.WriteLine("Node info: " + no.TransformComponent.ToString());
                         no.TransformComponent.Position.y += 25;
                         no.toLeft = false;
                     }
@@ -48,7 +46,6 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
                     {
                         no.TransformComponent.Position.y += 25;
                         no.toLeft = true;
-                        Console.WriteLine("Node info: " + no.TransformComponent.ToString());
                     }
                 }
                 else
