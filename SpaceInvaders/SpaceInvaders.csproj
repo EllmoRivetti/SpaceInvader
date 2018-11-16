@@ -52,6 +52,8 @@
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Engine.cs" />
     <Compile Include="Entities\Enemy.cs" />
+    <Compile Include="Entities\EnemyBlock.cs" />
+    <Compile Include="Entities\EnemyLine.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Kinematic.cs" />
     <Compile Include="Entities\Player.cs" />
@@ -142,10 +144,7 @@
   <ItemGroup>
     <None Include="Resources\shoot1.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Nodes and Systems\EnnemyBlock\" />
-    <Folder Include="Nodes and Systems\EnnemyLine\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

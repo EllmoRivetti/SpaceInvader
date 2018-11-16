@@ -14,13 +14,17 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
         public VelocityComponent VelocityComponent { get; set; }
         public RenderComponent RenderComponent { get; set; }
 
+        public bool toLeft { get; set; }
+
         public MoveEnemyNode(Entity e)
         {
+            toLeft = true;
             TransformComponent = (TransformComponent)e.GetComponent(typeof(TransformComponent));
             VelocityComponent = (VelocityComponent)e.GetComponent(typeof(VelocityComponent));
             RenderComponent = (RenderComponent)e.GetComponent(typeof(RenderComponent));
         }
 
         public new static bool ToCreate(Entity e) => e.GetType() == typeof(Enemy);
+
     }
 }

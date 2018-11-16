@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Nodes;
+﻿using SpaceInvaders.Entities;
+using SpaceInvaders.Nodes;
 using SpaceInvaders.Systems;
 using System;
 using System.Collections.Generic;
@@ -15,28 +16,43 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
         {
             listNode = Engine.instance.NodeListByType[typeof(MoveEnemyNode)];
 
-            Vecteur2D movementVector = new Vecteur2D();
-            if (Engine.instance.keyPressed.Contains(Keys.Left))
+            
+
+            foreach (MoveEnemyNode n in listNode)
             {
-                movementVector += new Vecteur2D(time, 0);
-            }
-            if (Engine.instance.keyPressed.Contains(Keys.Right))
-            {
-                movementVector += new Vecteur2D(-time, 0);
-            }
-            if (movementVector != new Vecteur2D())
-            {
-                foreach (MoveEnemyNode n in listNode)
+                Vecteur2D movementVector = new Vecteur2D();
+                if (n.toLeft)
                 {
-                    Vecteur2D tempPos = n.TransformComponent.Position + movementVector * n.VelocityComponent.Velocity;
-                    if (tempPos.x > RenderForm.instance.Width - n.RenderComponent.sprite.Width)
+                    movementVector += new Vecteur2D(time, 0);
+                }
+                else
+                {
+                    movementVector -= new Vecteur2D(time, 0);
+                }
+
+                Vecteur2D tempPos = n.TransformComponent.Position + movementVector * n.VelocityComponent.Velocity;
+                if (tempPos.x > RenderForm.instance.Width - n.RenderComponent.sprite.Width)
+                {
+                    Console.WriteLine("--------");
+                    foreach (MoveEnemyNode no in listNode)
                     {
-                        tempPos.x = RenderForm.instance.Width - n.RenderComponent.sprite.Width;
+                        Console.WriteLine("Node info: " + no.TransformComponent.ToString());
+                        no.TransformComponent.Position.y += 25;
+                        no.toLeft = false;
                     }
-                    else if (tempPos.x < 0)
+                }
+                else if (tempPos.x < 0)
+                {
+                    
+                    foreach (MoveEnemyNode no in listNode)
                     {
-                        tempPos.x = 0;
+                        no.TransformComponent.Position.y += 25;
+                        no.toLeft = true;
+                        Console.WriteLine("Node info: " + no.TransformComponent.ToString());
                     }
+                }
+                else
+                {
                     n.TransformComponent.Position = tempPos;
                 }
             }

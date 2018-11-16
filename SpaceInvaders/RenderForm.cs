@@ -40,7 +40,7 @@ namespace SpaceInvaders
             if (instance == null)
                 instance = new RenderForm();//TODO Systeme de scene pour gerer la création des entités
             Engine.instance.AddEntity(new Player());
-            Engine.instance.AddEntity(new Enemy());
+            Engine.instance.AddEntity(new EnemyBlock());
             return instance;
         }
 

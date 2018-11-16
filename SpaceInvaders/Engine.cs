@@ -19,7 +19,7 @@ namespace SpaceInvaders
 
         private List<ISystem> SystemsList { get; }
 
-        private List<Entity> EntitiesList { get; }
+        public List<Entity> EntitiesList { get; }
 
         public Dictionary<Type, List<Node>> NodeListByType;//Type : type des nodes (genre toutes les nodes de render etc ..)
 

@@ -14,7 +14,5 @@ namespace SpaceInvaders.Components
         {
             Velocity = new Vecteur2D();
         }
-
-
     }
 }

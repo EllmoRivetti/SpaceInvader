@@ -12,10 +12,16 @@ namespace SpaceInvaders.Entities
         public Enemy() : base(Image.FromFile("../../Resources/ship2.png"))
         {
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
-            startPos.Position.y = RenderForm.instance.Size.Height * 2 / 5;
-            startPos.Position.x = RenderForm.instance.Size.Width / 2;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
-            velocity.Velocity.x = 500;
+            velocity.Velocity.x = 50;
         }
+
+        public void SetStartPos(double x , double y)
+        {
+            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            startPos.Position.y = y;
+            startPos.Position.x = x;
+        }
+
     }
 }

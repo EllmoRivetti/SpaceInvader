@@ -31,5 +31,10 @@ namespace SpaceInvaders.Components
             LocalScale = new Vecteur2D();
         }
 
+        public override string ToString()
+        {
+            return "Position x: "+Position.x+" y: "+Position.y;
+        }
+
     }
 }
