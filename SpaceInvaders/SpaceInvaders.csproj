@@ -71,8 +71,10 @@
     <Compile Include="Nodes and Systems\Player\MovePlayerNode.cs" />
     <Compile Include="Nodes and Systems\Node.cs" />
     <Compile Include="Nodes and Systems\Player\MovePlayerSystem.cs" />
-    <Compile Include="Nodes and Systems\Shoot\ShootPlayerNode.cs" />
-    <Compile Include="Nodes and Systems\Shoot\ShootPlayerSystem.cs" />
+    <Compile Include="Nodes and Systems\Shoot\Enemy\ShootEnemyNode.cs" />
+    <Compile Include="Nodes and Systems\Shoot\Enemy\ShootEnemySystem.cs" />
+    <Compile Include="Nodes and Systems\Shoot\Player\ShootPlayerNode.cs" />
+    <Compile Include="Nodes and Systems\Shoot\Player\ShootPlayerSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderForm.cs">

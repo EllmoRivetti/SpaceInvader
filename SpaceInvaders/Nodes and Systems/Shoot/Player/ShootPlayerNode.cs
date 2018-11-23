@@ -15,7 +15,6 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
         public ShootPlayerNode(Entity e)
         {
             PlayerPosition = (TransformComponent)e.GetComponent(typeof(TransformComponent));
-            Console.WriteLine("Is ok since here");
             ShootComponent = (ShootComponent)e.GetComponent(typeof(ShootComponent));
         }
 

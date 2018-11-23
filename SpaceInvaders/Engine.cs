@@ -106,6 +106,7 @@ namespace SpaceInvaders
             AddSystem(new MoveEnemySystem());
             AddSystem(new MoveMissileSystem());
             AddSystem(new ShootPlayerSystem());
+            AddSystem(new ShootEnemySystem());
         }
 
         private void AddSystem(ISystem s)

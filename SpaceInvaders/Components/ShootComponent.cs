@@ -10,10 +10,14 @@ namespace SpaceInvaders.Components
     {
         public double FireRate { get; set; }
         public double TimeSinceLastShoot { get; set; }
-        public ShootComponent(Entity e, double FireRate) : base(e)
+        public double ShootBaseProbability { get; set; }
+        public double NextShootProbability { get; set; }
+        public ShootComponent(Entity e, double FireRate, double baseProbability) : base(e)
         {
             this.FireRate = FireRate;
             this.TimeSinceLastShoot = FireRate;
+            this.ShootBaseProbability = baseProbability;
+            this.NextShootProbability = 0;
         }
     }
 }

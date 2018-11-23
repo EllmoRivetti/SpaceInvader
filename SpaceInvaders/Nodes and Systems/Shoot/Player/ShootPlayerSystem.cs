@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Entities.Missiles;
+﻿using SpaceInvaders.Entities;
+using SpaceInvaders.Entities.Missiles;
 using SpaceInvaders.Nodes;
 using SpaceInvaders.Systems;
 using System;
