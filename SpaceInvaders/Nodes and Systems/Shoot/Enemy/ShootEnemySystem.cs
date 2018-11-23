@@ -40,7 +40,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
                         //Console.WriteLine("Shoot");
                         n.ShootComponent.NextShootProbability = n.ShootComponent.ShootBaseProbability;
                         n.ShootComponent.TimeSinceLastShoot = 0;
-                        EnemyMissile missile = new EnemyMissile(n.EnemyPosition.Position);
+                        Vecteur2D posMissile = n.EnemyPosition.Position + new Vecteur2D(15, 24);
+                        EnemyMissile missile = new EnemyMissile(posMissile);
                         Engine.instance.AddEntity(missile);
                     }
                     else

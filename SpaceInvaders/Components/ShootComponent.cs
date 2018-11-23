@@ -12,12 +12,14 @@ namespace SpaceInvaders.Components
         public double TimeSinceLastShoot { get; set; }
         public double ShootBaseProbability { get; set; }
         public double NextShootProbability { get; set; }
-        public ShootComponent(Entity e, double FireRate, double baseProbability) : base(e)
+        public double MissileSpeed { get; set; }
+        public ShootComponent(Entity e, double FireRate, double baseProbability, double speed) : base(e)
         {
             this.FireRate = FireRate;
             this.TimeSinceLastShoot = FireRate;
             this.ShootBaseProbability = baseProbability;
             this.NextShootProbability = 0;
+            this.MissileSpeed = speed;
         }
     }
 }

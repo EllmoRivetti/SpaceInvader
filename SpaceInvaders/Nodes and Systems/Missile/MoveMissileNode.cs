@@ -13,12 +13,13 @@ namespace SpaceInvaders.Nodes_and_Systems.Missile
     {
         public TransformComponent TransformComponent { get; set; }
         public VelocityComponent VelocityComponent { get; set; }
+
         public bool IsFromPlayer;
         public MoveMissileNode(Entity e)
         {
             TransformComponent = (TransformComponent)e.GetComponent(typeof(TransformComponent));
             VelocityComponent = (VelocityComponent)e.GetComponent(typeof(VelocityComponent));
-            if(e.GetType() == typeof(PlayerMissile))
+            if (e.GetType() == typeof(PlayerMissile))
             {
                 IsFromPlayer = true;
             }

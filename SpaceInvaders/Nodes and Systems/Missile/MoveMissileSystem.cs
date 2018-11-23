@@ -18,7 +18,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Missile
             {
                 if(n.IsFromPlayer)
                 {
-                    n.TransformComponent.Position.y -= 1.5;
+                    n.TransformComponent.Position.y -= 1;
                 }
                 else
                 {

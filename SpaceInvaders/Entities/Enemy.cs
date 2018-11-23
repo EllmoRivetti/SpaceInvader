@@ -14,7 +14,7 @@ namespace SpaceInvaders.Entities
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 50;
-            ShootComponent shootStat = new ShootComponent(this,0.2,1);
+            ShootComponent shootStat = new ShootComponent(this,0.2,1,0.5);
             AddComponent(shootStat);
         }
 

@@ -39,7 +39,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
                 if (n.ShootComponent.TimeSinceLastShoot > n.ShootComponent.FireRate)
                 {
                     n.ShootComponent.TimeSinceLastShoot = 0;
-                    PlayerMissile missile = new PlayerMissile(n.PlayerPosition.Position);
+                    Vecteur2D posMissile = n.PlayerPosition.Position + new Vecteur2D(15,-24);
+                    PlayerMissile missile = new PlayerMissile(posMissile);
                     Engine.instance.AddEntity(missile);
                 }
             }

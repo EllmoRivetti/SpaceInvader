@@ -17,7 +17,7 @@ namespace SpaceInvaders.Entities
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 500;
 
-            ShootComponent shootStatus = new ShootComponent(this,0.2,0);//Le dernier parametre n'est pas nécessaire pour le joueur
+            ShootComponent shootStatus = new ShootComponent(this,0.2,0,1);//Le dernier parametre n'est pas nécessaire pour le joueur
             AddComponent(shootStatus);
         }
     }
