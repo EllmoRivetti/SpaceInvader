@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpaceInvaders.Entities.Missiles
 {
-    class EnemyMissile:Missile
+    class EnemyMissile:MissileAbs
     {
         public EnemyMissile(Vecteur2D origin) : base(origin,Image.FromFile("../../Resources/shoot1.png"))
         {

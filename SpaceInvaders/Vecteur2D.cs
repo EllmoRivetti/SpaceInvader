@@ -63,6 +63,11 @@ namespace SpaceInvaders
         {
             return new Vecteur2D(v.x / value, v.y / value);
         }
+
+        public String ToString()
+        {
+            return "X: " + x + " Y: " + y;
+        }
     
 
     }

@@ -1,25 +1,25 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Entities.Missiles;
+using SpaceInvaders.Nodes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SpaceInvaders.Nodes
+namespace SpaceInvaders.Nodes_and_Systems.Missile
 {
-    class MovePlayerNode : Node
-    {  
+    class MoveMissileNode : Node
+    {
         public TransformComponent TransformComponent { get; set; }
         public VelocityComponent VelocityComponent { get; set; }
-        public RenderComponent RenderComponent { get; set; }
-
-        public MovePlayerNode(Entity e)
+        public MoveMissileNode(Entity e)
         {
             TransformComponent = (TransformComponent)e.GetComponent(typeof(TransformComponent));
             VelocityComponent = (VelocityComponent)e.GetComponent(typeof(VelocityComponent));
-            RenderComponent = (RenderComponent)e.GetComponent(typeof(RenderComponent));
         }
 
-        public new static bool ToCreate(Entity e) => e.GetType() == typeof(Player);
-    }  
+        public new static bool ToCreate(Entity e) => e.GetType() == typeof(PlayerMissile);
+
+    }
 }

@@ -16,6 +16,9 @@ namespace SpaceInvaders.Entities
             startPos.Position.x = RenderForm.instance.Size.Width / 2;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 500;
+
+            ShootComponent shootStatus = new ShootComponent(this,0.2);
+            AddComponent(shootStatus);
         }
     }
 }

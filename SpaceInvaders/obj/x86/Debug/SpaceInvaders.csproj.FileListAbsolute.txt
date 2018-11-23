@@ -16,3 +16,12 @@ C:\Users\rivettie\Documents\3I_IN2_18_rivettie\SpaceInvaders\obj\x86\Debug\Space
 C:\Users\rivettie\Documents\3I_IN2_18_rivettie\SpaceInvaders\obj\x86\Debug\SpaceInvaders.exe
 C:\Users\rivettie\Documents\3I_IN2_18_rivettie\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb
 C:\Users\rivettie\Documents\3I_IN2_18_rivettie\SpaceInvaders\obj\x86\Debug\SpaceInvaders.RenderForm.resources
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csprojResolveAssemblyReference.cache
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.Properties.Resources.resources
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.RenderForm.resources
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.exe
+C:\Users\rivettie\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb

@@ -1,7 +1,9 @@
 ﻿using SpaceInvaders.Entities;
 using SpaceInvaders.Nodes;
 using SpaceInvaders.Nodes_and_Systems.Ennemy;
+using SpaceInvaders.Nodes_and_Systems.Missile;
 using SpaceInvaders.Nodes_and_Systems.Player;
+using SpaceInvaders.Nodes_and_Systems.Shoot;
 using SpaceInvaders.Systems;
 using System;
 using System.Collections.Generic;
@@ -64,13 +66,16 @@ namespace SpaceInvaders
 
         public void AddEntity(Entity e)
         {
+            Console.WriteLine("AJOUT DE L'ENTITY: " + e);
             EntitiesList.Add(e);
             NodeListByEntity[e] = new List<Node>();
             foreach (Type nType in nodeTypes)
             {
+               
                 Entity[] currentEntity = { e };
                 if ((bool)nType.GetMethod("ToCreate").Invoke(null, currentEntity))
                 {
+                    Console.WriteLine("To create for:" +nType);
                     Type[] currentType = {typeof(Entity)};
                     Node node = (Node)nType.GetConstructor(currentType).Invoke(currentEntity);
                     NodeListByType[nType].Add(node);
@@ -78,7 +83,7 @@ namespace SpaceInvaders
                 }
 
             }
-
+            Console.WriteLine("-------------");
         }
 
         public void RemoveEntity(Entity e)
@@ -99,6 +104,8 @@ namespace SpaceInvaders
         {
             AddSystem(new MovePlayerSystem());
             AddSystem(new MoveEnemySystem());
+            AddSystem(new MoveMissileSystem());
+            AddSystem(new ShootPlayerSystem());
         }
 
         private void AddSystem(ISystem s)

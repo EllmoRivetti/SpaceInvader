@@ -16,8 +16,6 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
         {
             listNode = Engine.instance.NodeListByType[typeof(MoveEnemyNode)];
 
-            
-
             foreach (MoveEnemyNode n in listNode)
             {
                 Vecteur2D movementVector = new Vecteur2D();
