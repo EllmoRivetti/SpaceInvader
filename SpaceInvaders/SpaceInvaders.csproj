@@ -76,6 +76,8 @@
     <Compile Include="Nodes and Systems\Shoot\Enemy\ShootEnemySystem.cs" />
     <Compile Include="Nodes and Systems\Shoot\Player\ShootPlayerNode.cs" />
     <Compile Include="Nodes and Systems\Shoot\Player\ShootPlayerSystem.cs" />
+    <Compile Include="Nodes and Systems\UI\ReLaunchGameSystem.cs" />
+    <Compile Include="Nodes and Systems\UI\SetPauseSystem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RenderForm.cs">

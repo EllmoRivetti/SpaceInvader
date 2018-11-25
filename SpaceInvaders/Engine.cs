@@ -4,6 +4,7 @@ using SpaceInvaders.Nodes_and_Systems.Ennemy;
 using SpaceInvaders.Nodes_and_Systems.Missile;
 using SpaceInvaders.Nodes_and_Systems.Player;
 using SpaceInvaders.Nodes_and_Systems.Shoot;
+using SpaceInvaders.Nodes_and_Systems.UI;
 using SpaceInvaders.Systems;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,8 @@ namespace SpaceInvaders
 
         private List<ISystem> SystemsList { get; }
 
+        private List<ISystem> UISystemsList { get; }
+
         public List<Entity> EntitiesList { get; }
 
         public Dictionary<Type, List<Node>> NodeListByType;//Type : type des nodes (genre toutes les nodes de render etc ..)
@@ -31,9 +34,12 @@ namespace SpaceInvaders
 
         public HashSet<Keys> keyPressed = new HashSet<Keys>();
 
+        public bool IsPaused { get; set; }
+
         private Engine()
         {
             SystemsList = new List<ISystem>();
+            UISystemsList = new List<ISystem>();
             EntitiesList = new List<Entity>();
             NodeListByType = new Dictionary<Type, List<Node>>();
             NodeListByEntity = new Dictionary<Entity, List<Node>>();
@@ -42,6 +48,8 @@ namespace SpaceInvaders
                 .Assembly
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(Node)));
+
+            IsPaused = false;
 
             foreach(Type t in nodeTypes)
             {
@@ -107,11 +115,18 @@ namespace SpaceInvaders
             AddSystem(new MoveMissileSystem());
             AddSystem(new ShootPlayerSystem());
             AddSystem(new ShootEnemySystem());
+            AddSystem(new SetPauseSystem());
+            AddUISystem(new ReLaunchGameSystem());
         }
 
         private void AddSystem(ISystem s)
         {
             SystemsList.Add(s);
+        }
+
+        private void AddUISystem(ISystem s)
+        {
+            UISystemsList.Add(s);
         }
 
         private void RemoveSystem(ISystem s)
@@ -122,9 +137,20 @@ namespace SpaceInvaders
 
         public void Update(double time)
         {
-            foreach(ISystem s in SystemsList)
+
+            if (IsPaused)
             {
-                s.Update(time);
+                foreach (ISystem s in UISystemsList)
+                {
+                    s.Update(time);
+                }
+            }
+            else
+            {
+                foreach (ISystem s in SystemsList)
+                {
+                    s.Update(time);
+                }
             }
         }
 
