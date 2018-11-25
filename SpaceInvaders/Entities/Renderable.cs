@@ -17,7 +17,8 @@ namespace SpaceInvaders.Entities
         public void Render(Graphics g)
         {
             RenderComponent renderComponent = ((RenderComponent)GetComponent(typeof(RenderComponent)));
-            g.DrawImage(renderComponent.sprite, (float)renderComponent.view.x, (float)renderComponent.view.y);
+            //g.DrawImage(renderComponent.sprite, (float)renderComponent.view.x, (float)renderComponent.view.y);
+            g.DrawImage(renderComponent.sprite, (float)renderComponent.view.x, (float)renderComponent.view.y, (float)renderComponent.sprite.Width, (float)renderComponent.sprite.Height);
         }
 
     }

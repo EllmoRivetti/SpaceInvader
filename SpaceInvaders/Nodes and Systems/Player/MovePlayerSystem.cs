@@ -30,9 +30,9 @@ namespace SpaceInvaders.Nodes_and_Systems.Player
                 foreach (MovePlayerNode n in listNode)
                 {
                     Vecteur2D tempPos = n.TransformComponent.Position + movementVector * n.VelocityComponent.Velocity;
-                    if (tempPos.x > RenderForm.instance.Width-n.RenderComponent.sprite.Width-25)//-25 pour empecher le bug de fenetre ou la sprite sort a moitié
+                    if (tempPos.x > RenderForm.instance.Width-n.RenderComponent.sprite.Width-15)//-25 pour empecher le bug de fenetre ou la sprite sort a moitié
                     {
-                        tempPos.x = RenderForm.instance.Width - n.RenderComponent.sprite.Width-25;//-25 pour empecher le bug de fenetre ou la sprite sort a moitié
+                        tempPos.x = RenderForm.instance.Width - n.RenderComponent.sprite.Width-15;//-25 pour empecher le bug de fenetre ou la sprite sort a moitié
                     }
                     else if (tempPos.x < 0)
                     {

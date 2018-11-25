@@ -52,6 +52,7 @@
     <Compile Include="Components\TransformComponent.cs" />
     <Compile Include="Components\VelocityComponent.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="Entities\Bunker.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\EnemyBlock.cs" />
     <Compile Include="Entities\EnemyLine.cs" />

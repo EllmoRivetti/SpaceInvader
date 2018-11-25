@@ -29,7 +29,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
                 }
 
                 Vecteur2D tempPos = n.TransformComponent.Position + movementVector * n.VelocityComponent.Velocity;
-                if (tempPos.x > RenderForm.instance.Width - n.RenderComponent.sprite.Width - 25)//-25 pour empecher le bug de fenetre ou la sprite sort a moitié
+                if (tempPos.x > RenderForm.instance.Width - n.RenderComponent.sprite.Width-15)//-15 pour empecher le bug de fenetre ou la sprite sort a moitié
                 {
                     foreach (MoveEnemyNode no in listNode)
                     {
