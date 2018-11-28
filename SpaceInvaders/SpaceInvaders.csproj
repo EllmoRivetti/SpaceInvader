@@ -71,6 +71,7 @@
     <Compile Include="Nodes and Systems\Collision\CollisionSystem.cs" />
     <Compile Include="Nodes and Systems\Ennemy\MoveEnemyNode.cs" />
     <Compile Include="Nodes and Systems\Ennemy\MoveEnemySystem.cs" />
+    <Compile Include="Nodes and Systems\GameManagement\CheckEndGameSystem.cs" />
     <Compile Include="Nodes and Systems\Missile\MoveMissileNode.cs" />
     <Compile Include="Nodes and Systems\Missile\MoveMissileSystem.cs" />
     <Compile Include="Nodes and Systems\OffScreen\OffScreenNode.cs" />

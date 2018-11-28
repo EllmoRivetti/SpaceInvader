@@ -3,6 +3,7 @@ using SpaceInvaders.Entities;
 using SpaceInvaders.Nodes;
 using SpaceInvaders.Nodes_and_Systems.Collision;
 using SpaceInvaders.Nodes_and_Systems.Ennemy;
+using SpaceInvaders.Nodes_and_Systems.GameManagement;
 using SpaceInvaders.Nodes_and_Systems.Missile;
 using SpaceInvaders.Nodes_and_Systems.OffScreen;
 using SpaceInvaders.Nodes_and_Systems.Player;
@@ -39,6 +40,10 @@ namespace SpaceInvaders
 
         public bool IsPaused { get; set; }
 
+        public bool IsVictory { get; set; }
+
+        public bool IsDefeat { get; set; }
+
         private Engine()
         {
             SystemsList = new List<ISystem>();
@@ -53,6 +58,8 @@ namespace SpaceInvaders
                 .Where(t => t.IsSubclassOf(typeof(Node)));
 
             IsPaused = false;
+            IsDefeat = false;
+            IsVictory = false;
 
             foreach(Type t in nodeTypes)
             {
@@ -120,7 +127,8 @@ namespace SpaceInvaders
             AddSystem(new ShootPlayerSystem());
             AddSystem(new ShootEnemySystem());
             AddSystem(new CollisionSystem());
-           // AddSystem(new OffScreenSystem());
+            AddSystem(new OffScreenSystem());
+            AddSystem(new CheckEndGameSystem());
             AddSystem(new SetPauseSystem());
             AddUISystem(new ReLaunchGameSystem());
         }
@@ -153,9 +161,20 @@ namespace SpaceInvaders
             }
             else
             {
-                foreach (ISystem s in SystemsList)
+                if (IsVictory)
                 {
-                    s.Update(time);
+                    Console.WriteLine("Yeah ! You win");
+                }
+                else if (IsDefeat)
+                {
+                    Console.WriteLine("Nooo ! Defeat ..");
+                }
+                else
+                {
+                    foreach (ISystem s in SystemsList)
+                    {
+                        s.Update(time);
+                    }
                 }
             }
         }
