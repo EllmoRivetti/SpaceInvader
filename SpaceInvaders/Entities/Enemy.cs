@@ -7,9 +7,9 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Enemy:Kinematic
+    class Enemy:Collidable
     {
-        public Enemy() : base(Image.FromFile("../../Resources/ship2.png"))
+        public Enemy() : base(Image.FromFile("../../Resources/ship2.png"), CollisionTag.ENEMY)
         {
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;

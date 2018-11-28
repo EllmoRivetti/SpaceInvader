@@ -1,7 +1,9 @@
 ﻿using SpaceInvaders.Entities;
 using SpaceInvaders.Nodes;
+using SpaceInvaders.Nodes_and_Systems.Collision;
 using SpaceInvaders.Nodes_and_Systems.Ennemy;
 using SpaceInvaders.Nodes_and_Systems.Missile;
+using SpaceInvaders.Nodes_and_Systems.OffScreen;
 using SpaceInvaders.Nodes_and_Systems.Player;
 using SpaceInvaders.Nodes_and_Systems.Shoot;
 using SpaceInvaders.Nodes_and_Systems.UI;
@@ -74,7 +76,7 @@ namespace SpaceInvaders
 
         public void AddEntity(Entity e)
         {
-            Console.WriteLine("AJOUT DE L'ENTITY: " + e);
+            //Console.WriteLine("AJOUT DE L'ENTITY: " + e);
             EntitiesList.Add(e);
             NodeListByEntity[e] = new List<Node>();
             foreach (Type nType in nodeTypes)
@@ -83,7 +85,7 @@ namespace SpaceInvaders
                 Entity[] currentEntity = { e };
                 if ((bool)nType.GetMethod("ToCreate").Invoke(null, currentEntity))
                 {
-                    Console.WriteLine("To create for:" +nType);
+                    //Console.WriteLine("To create for:" +nType);
                     Type[] currentType = {typeof(Entity)};
                     Node node = (Node)nType.GetConstructor(currentType).Invoke(currentEntity);
                     NodeListByType[nType].Add(node);
@@ -91,11 +93,12 @@ namespace SpaceInvaders
                 }
 
             }
-            Console.WriteLine("-------------");
+            //Console.WriteLine("-------------");
         }
 
         public void RemoveEntity(Entity e)
         {
+            Console.WriteLine("DELETE THIS ENTITY : " + e.ToString());
             if (EntitiesList.Contains(e))
             {
                 EntitiesList.Remove(e);
@@ -115,6 +118,8 @@ namespace SpaceInvaders
             AddSystem(new MoveMissileSystem());
             AddSystem(new ShootPlayerSystem());
             AddSystem(new ShootEnemySystem());
+            AddSystem(new CollisionSystem());
+            AddSystem(new OffScreenSystem());
             AddSystem(new SetPauseSystem());
             AddUISystem(new ReLaunchGameSystem());
         }

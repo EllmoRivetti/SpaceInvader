@@ -7,9 +7,9 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Player:Kinematic
+    class Player:Collidable
     {
-        public Player():base(Image.FromFile("../../Resources/ship1.png"))
+        public Player():base(Image.FromFile("../../Resources/ship1.png"),CollisionTag.PLAYER)
         {
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
             startPos.Position.y = RenderForm.instance.Size.Height * 5.2 / 6;
