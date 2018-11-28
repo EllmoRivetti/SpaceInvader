@@ -45,7 +45,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
         public void Update(double time)
         {
             listNode = Engine.instance.NodeListByType[typeof(CollisionNode)];
-            Console.WriteLine("LIST SIZE: "+listNode.Count);
+            RenderForm.instance.Text = listNode.Count.ToString();
             for (int idFirstNode = 0; idFirstNode < listNode.Count; idFirstNode++)
             {
                 for (int idSecondNode = 0; idSecondNode < listNode.Count; idSecondNode++)
@@ -55,8 +55,10 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
 
                     if(CanCollide(node1.HitBoxComponent.tag, node2.HitBoxComponent.tag))
                     {
+                        
                         if (node1.HitBoxComponent.HitBox.Collides(node2.HitBoxComponent.HitBox))
                         {
+                            Console.WriteLine("Do collide: " + node1.HitBoxComponent.entity.ToString() + " and " + node2.HitBoxComponent.entity.ToString());
                             Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
                             Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
                         }

@@ -20,6 +20,7 @@ namespace SpaceInvaders.Components
         public HitBoxComponent(Entity e, CollisionTag tag, Vecteur2D origin, double width, double height) : base(e)
         {
             HitBox = new Box(origin, width, height);
+            //Console.WriteLine(HitBox.ToString());
             this.tag = tag;
         }
 
@@ -29,12 +30,7 @@ namespace SpaceInvaders.Components
             this.tag = tag;
         }
 
-        public void CreateHitBox(Vecteur2D origin, double width, double height)
-        {
-            CreateHitBox(origin.x, origin.y, width, height);
-        }
-
-        public void CreateHitBox(double x, double y, double width, double height)
+        public void Update(double x, double y, double width, double height)
         {
             this.HitBox.X = x;
             this.HitBox.Y = y;
@@ -69,9 +65,15 @@ namespace SpaceInvaders.Components
         }
         public bool Collides(Box secondBox)
         {
-            return !(this.X > secondBox.XPlusWidth || this.XPlusWidth > secondBox.X ||
-                     this.Y > secondBox.YPlusHeight || this.YPlusHeight > secondBox.Y);       
+            return !((this.X > secondBox.XPlusWidth || this.XPlusWidth < secondBox.X) ||
+                     (this.Y > secondBox.YPlusHeight || this.YPlusHeight < secondBox.Y));       
         }
+
+        public override string ToString()
+        {
+            return "Box[X: "+X+" | Y: "+Y+" | X + width: "+XPlusWidth+" | Y + heigth: " + YPlusHeight;
+        }
+
     }
 
 

@@ -1,4 +1,5 @@
-﻿using SpaceInvaders.Entities;
+﻿using SpaceInvaders.Components;
+using SpaceInvaders.Entities;
 using SpaceInvaders.Nodes;
 using SpaceInvaders.Nodes_and_Systems.Collision;
 using SpaceInvaders.Nodes_and_Systems.Ennemy;
@@ -119,7 +120,7 @@ namespace SpaceInvaders
             AddSystem(new ShootPlayerSystem());
             AddSystem(new ShootEnemySystem());
             AddSystem(new CollisionSystem());
-            AddSystem(new OffScreenSystem());
+           // AddSystem(new OffScreenSystem());
             AddSystem(new SetPauseSystem());
             AddUISystem(new ReLaunchGameSystem());
         }
@@ -166,6 +167,21 @@ namespace SpaceInvaders
                 var entity = e as Renderable;
                 if (entity != null)
                     ((Renderable)e).Render(g);
+            }
+
+            bool showHitBox = true;
+            foreach(CollisionNode col in Engine.instance.NodeListByType[typeof(CollisionNode)])
+            {
+                if (showHitBox)
+                {
+                    Box box = col.HitBoxComponent.HitBox;
+                    Rectangle rect = new Rectangle((int)box.X, (int)box.Y, (int)(box.XPlusWidth - box.X), (int)(box.YPlusHeight - box.Y));
+                    Pen redPen = new Pen(Color.Red)
+                    {
+                        Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+                    };
+                    g.DrawRectangle(redPen, rect);
+                }
             }
         }
 

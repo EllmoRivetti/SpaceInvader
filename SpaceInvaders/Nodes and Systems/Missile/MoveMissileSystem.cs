@@ -18,11 +18,11 @@ namespace SpaceInvaders.Nodes_and_Systems.Missile
             {
                 if(n.IsFromPlayer)
                 {
-                    n.TransformComponent.Position.y -= 1;
+                    n.TransformComponent.Position += new Vecteur2D(0,-1);
                 }
                 else
                 {
-                    n.TransformComponent.Position.y += 0.5;
+                    n.TransformComponent.Position += new Vecteur2D(0, +0.5);
                 }  
             }
         }

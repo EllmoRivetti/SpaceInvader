@@ -12,8 +12,9 @@ namespace SpaceInvaders.Entities
         public Collidable(Image image, CollisionTag tag) : base(image)
         {
             TransformComponent origin = GetComponent(typeof(TransformComponent)) as TransformComponent;
-            double width = origin.Position.x + image.Width;
-            double height = origin.Position.y + image.Height;
+            RenderComponent render = GetComponent(typeof(RenderComponent)) as RenderComponent;
+            double width = origin.Position.x + render.sprite.Width;
+            double height = origin.Position.y + render.sprite.Height;
             AddComponent(new HitBoxComponent(this , tag , origin.Position , width , height));
         }
 

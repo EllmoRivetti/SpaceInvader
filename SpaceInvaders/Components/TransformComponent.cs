@@ -18,9 +18,22 @@ namespace SpaceInvaders.Components
 
             set
             {
-                position = value; 
-                RenderComponent r = ((RenderComponent)entity.GetComponent(typeof(RenderComponent)));
-                r.view = position;
+                position = value;
+                try
+                {
+                    
+                    RenderComponent r = ((RenderComponent)entity.GetComponent(typeof(RenderComponent)));
+                    r.view = position;
+                    try
+                    {
+                        HitBoxComponent h = ((HitBoxComponent)entity.GetComponent(typeof(HitBoxComponent)));
+                        h.Update(position.x,position.y,r.sprite.Width,r.sprite.Height);
+                        //Console.WriteLine(h.HitBox.ToString());
+                    }
+                    catch { }
+                }
+                catch{ }
+                
             }
         }
         public Vecteur2D LocalScale;
