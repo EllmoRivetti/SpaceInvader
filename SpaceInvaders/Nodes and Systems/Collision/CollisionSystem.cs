@@ -31,6 +31,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.ENEMYMISSILE, true);
             SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.PLAYERMISSILE, true);
             SetTruthTableComponent(CollisionTag.ENEMYMISSILE, CollisionTag.PLAYERMISSILE, true);
+            SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.ENEMY, true);
         }
 
         private void SetTruthTableComponent(CollisionTag tag1, CollisionTag tag2, bool result)
@@ -128,7 +129,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
 
             if (ChangeColorToTransparent(node1.RenderComponent, relativeHitBox))
             {
-                Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+                if(node2.HitBoxComponent.tag != CollisionTag.ENEMY)
+                    Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
             }
         }
 
