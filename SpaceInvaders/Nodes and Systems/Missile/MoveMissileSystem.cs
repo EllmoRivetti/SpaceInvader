@@ -18,7 +18,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Missile
             {
                 if(n.IsFromPlayer)
                 {
-                    n.TransformComponent.Position += new Vecteur2D(0,-1);
+                    n.TransformComponent.Position += new Vecteur2D(0,-2);
                 }
                 else
                 {

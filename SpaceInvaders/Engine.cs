@@ -239,6 +239,7 @@ namespace SpaceInvaders
                 g.DrawRectangle(pen, rect);
                 g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
                 g.DrawString("You Lost ...", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 -20, rect.Height / 2 * 3-20);
+                g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 -30, rect.Height / 2 * 3+10);
             }
 
             if (IsVictory)
@@ -251,6 +252,7 @@ namespace SpaceInvaders
                 g.DrawRectangle(pen, rect);
                 g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
                 g.DrawString("You Won !", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
+                g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 30, rect.Height / 2 * 3 + 10);
             }
 
 
