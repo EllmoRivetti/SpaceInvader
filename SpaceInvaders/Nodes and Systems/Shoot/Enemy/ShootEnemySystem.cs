@@ -31,7 +31,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
                 if (n.ShootComponent.TimeSinceLastShoot >= n.ShootComponent.FireRate)
                 {
                     
-                    int probabilty = this.random.Next(0, 2000000);//Changer le maximum pour diminuer la proba de tirer
+                    int probabilty = this.random.Next(0, 200000);//Changer le maximum pour diminuer la proba de tirer
                     //Console.WriteLine("---");
                     //Console.WriteLine("proba = " + probabilty);
                     //Console.WriteLine("nextShoot = " + n.ShootComponent.NextShootProbability);

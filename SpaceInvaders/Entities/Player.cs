@@ -21,7 +21,7 @@ namespace SpaceInvaders.Entities
             ShootComponent shootStatus = new ShootComponent(this,0.2,0,1);//Le dernier parametre n'est pas nécessaire pour le joueur
             AddComponent(shootStatus);
 
-            Life = 1;
+            Life = 3;
         }
     }
 }

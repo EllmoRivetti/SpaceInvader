@@ -244,23 +244,27 @@ namespace SpaceInvaders
                 DrawPauseScreen(g);
             }
 
-
             //Used to print hitbox
             bool showHitBox = false;
-            foreach(CollisionNode col in Engine.instance.NodeListByType[typeof(CollisionNode)])
+            if (showHitBox)
             {
-                if (showHitBox)
-                {
-                    Box box = col.HitBoxComponent.HitBox;
-                    Rectangle rect = new Rectangle((int)box.X, (int)box.Y, (int)(box.XPlusWidth - box.X), (int)(box.YPlusHeight - box.Y));
-                    Pen redPen = new Pen(Color.Red)
-                    {
-                        Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
-                    };
-                    g.DrawRectangle(redPen, rect);
-                }
+                ShowHitBox(g);
             }
         }
+
+        public void ShowHitBox(Graphics g)
+        {
+        foreach (CollisionNode col in Engine.instance.NodeListByType[typeof(CollisionNode)])
+        {
+            Box box = col.HitBoxComponent.HitBox;
+            Rectangle rect = new Rectangle((int)box.X, (int)box.Y, (int)(box.XPlusWidth - box.X), (int)(box.YPlusHeight - box.Y));
+            Pen redPen = new Pen(Color.Red)
+            {
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+            };
+            g.DrawRectangle(redPen, rect);
+        }
+    }
 
         public void DrawDefeatScreen(Graphics g)
         {
