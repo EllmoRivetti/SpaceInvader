@@ -7,14 +7,14 @@ using System.Windows.Forms;
 
 namespace SpaceInvaders.Nodes_and_Systems.UI
 {
-    class ReLaunchGameSystem : ISystem
+    class RestartGameSystem : ISystem
     {
         public void Update(double time)
         {
-            if (Engine.instance.keyPressed.Contains(Keys.Escape))
+            if (Engine.instance.keyPressed.Contains(Keys.R))
             {
-                Engine.instance.IsPaused = false;
+                Engine.instance.ReinitGame();
             }
-        }   
+        }
     }
 }

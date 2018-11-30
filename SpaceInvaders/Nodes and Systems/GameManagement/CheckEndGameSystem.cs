@@ -12,19 +12,18 @@ namespace SpaceInvaders.Nodes_and_Systems.GameManagement
     {
         private List<Node> listEnemyNode;
 
-        private List<Node> listPlayerNode;
-
         public void Update(double time)
         {
             listEnemyNode = Engine.instance.NodeListByType[typeof(MoveEnemyNode)];
-            listPlayerNode = Engine.instance.NodeListByType[typeof(MovePlayerNode)];
+            
             //Console.WriteLine("nb enemy = " + listEnemyNode.Count);
             //Console.WriteLine("nb player = " + listPlayerNode.Count);
             if (listEnemyNode.Count == 0)
             {
                 Engine.instance.IsVictory = true;
             }
-            if(listPlayerNode.Count == 0)
+
+            if (((SpaceInvaders.Entities.Player)Engine.instance.EntitiesList[0]).Life <= 0)
             {
                 Engine.instance.IsDefeat = true;
             }

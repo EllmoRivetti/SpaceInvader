@@ -28,7 +28,9 @@ namespace SpaceInvaders
 
         private List<ISystem> UISystemsList { get; }
 
-        public List<Entity> EntitiesList { get; }
+        private List<ISystem> EndGameSystemsList { get; }
+
+        public List<Entity> EntitiesList { set; get; }
 
         public Dictionary<Type, List<Node>> NodeListByType;//Type : type des nodes (genre toutes les nodes de render etc ..)
 
@@ -41,13 +43,13 @@ namespace SpaceInvaders
         public bool IsPaused { get; set; }
 
         public bool IsVictory { get; set; }
-
         public bool IsDefeat { get; set; }
 
         private Engine()
         {
             SystemsList = new List<ISystem>();
             UISystemsList = new List<ISystem>();
+            EndGameSystemsList = new List<ISystem>();
             EntitiesList = new List<Entity>();
             NodeListByType = new Dictionary<Type, List<Node>>();
             NodeListByEntity = new Dictionary<Entity, List<Node>>();
@@ -81,6 +83,34 @@ namespace SpaceInvaders
         }
 
 
+        public void InstantiateGame()
+        {
+            Engine.instance.AddEntity(new Player());
+            Engine.instance.AddEntity(new EnemyBlock());
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 1, RenderForm.instance.Size.Height * 4.6 / 6)));
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 2.9, RenderForm.instance.Size.Height * 4.6 / 6)));
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 4.7, RenderForm.instance.Size.Height * 4.6 / 6)));
+        }
+
+        public void ReinitGame()
+        {
+            RemoveAllEntities();
+            EntitiesList = new List<Entity>();
+            IsPaused = false;
+            IsDefeat = false;
+            IsVictory = false;
+
+            InstantiateGame();
+        }
+
+
+        public void RemoveAllEntities()
+        {
+            for(int i = EntitiesList.Count - 1; i >= 0; i--)
+            {
+                RemoveEntity(EntitiesList[i]);
+            }
+        }
 
         public void AddEntity(Entity e)
         {
@@ -131,6 +161,7 @@ namespace SpaceInvaders
             AddSystem(new CheckEndGameSystem());
             AddSystem(new SetPauseSystem());
             AddUISystem(new ReLaunchGameSystem());
+            AddEndGameSystem(new RestartGameSystem());
         }
 
         private void AddSystem(ISystem s)
@@ -141,6 +172,11 @@ namespace SpaceInvaders
         private void AddUISystem(ISystem s)
         {
             UISystemsList.Add(s);
+        }
+
+        private void AddEndGameSystem(ISystem s)
+        {
+            EndGameSystemsList.Add(s);
         }
 
         private void RemoveSystem(ISystem s)
@@ -161,13 +197,12 @@ namespace SpaceInvaders
             }
             else
             {
-                if (IsVictory)
+                if (IsVictory || IsDefeat)
                 {
-                    Console.WriteLine("Yeah ! You win");
-                }
-                else if (IsDefeat)
-                {
-                    Console.WriteLine("Nooo ! Defeat ..");
+                    foreach (ISystem s in EndGameSystemsList)
+                    {
+                        s.Update(time);
+                    }
                 }
                 else
                 {
@@ -193,8 +228,33 @@ namespace SpaceInvaders
                     ((Renderable)e).Render(g);
             }
             DrawPlayerLife(g);
-            
 
+            if (IsDefeat)
+            {
+                Rectangle rect = new Rectangle(RenderForm.instance.Width /5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5 );
+                Pen pen = new Pen(Color.Black)
+                {
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+                };
+                g.DrawRectangle(pen, rect);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
+                g.DrawString("You Lost ...", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 -20, rect.Height / 2 * 3-20);
+            }
+
+            if (IsVictory)
+            {
+                Rectangle rect = new Rectangle(RenderForm.instance.Width / 5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5);
+                Pen pen = new Pen(Color.Black)
+                {
+                    Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+                };
+                g.DrawRectangle(pen, rect);
+                g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
+                g.DrawString("You Won !", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
+            }
+
+
+            //Used to print hitbox
             bool showHitBox = false;
             foreach(CollisionNode col in Engine.instance.NodeListByType[typeof(CollisionNode)])
             {
@@ -215,7 +275,5 @@ namespace SpaceInvaders
         {
             g.DrawString("Life : " + ((Player)EntitiesList[0]).Life, new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), 10, RenderForm.instance.Height - 75);
         }
-
-
     }
 }

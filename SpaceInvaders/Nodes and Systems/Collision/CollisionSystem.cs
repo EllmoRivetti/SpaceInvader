@@ -74,6 +74,10 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
                                     ManageAccurateCollision(node2, node1);
                                 }  
                             }
+                            else if(node1.HitBoxComponent.tag == CollisionTag.PLAYER || node2.HitBoxComponent.tag == CollisionTag.PLAYER)
+                            {
+                                ManagePlayerMissileColision(node1, node2);
+                            }
                             else
                             {
                                 Console.WriteLine("no bunker");
@@ -84,6 +88,27 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
                     }
                 }
             }
+        }
+
+        public void ManagePlayerMissileColision(CollisionNode node1, CollisionNode node2)
+        {
+            Console.WriteLine("has player");
+            if (node1.HitBoxComponent.tag == CollisionTag.PLAYER)
+            {
+                DecreasePlayerLife(node1);
+                Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+            }
+            else if (node2.HitBoxComponent.tag == CollisionTag.PLAYER)
+            {
+                DecreasePlayerLife(node2);
+                Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
+            }
+        }
+
+
+        public void DecreasePlayerLife(CollisionNode nodePlayer)
+        {
+            ((SpaceInvaders.Entities.Player)nodePlayer.HitBoxComponent.entity).Life--;
         }
 
         public void ManageAccurateCollision(CollisionNode node1, CollisionNode node2)
