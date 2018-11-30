@@ -231,28 +231,17 @@ namespace SpaceInvaders
 
             if (IsDefeat)
             {
-                Rectangle rect = new Rectangle(RenderForm.instance.Width /5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5 );
-                Pen pen = new Pen(Color.Black)
-                {
-                    Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
-                };
-                g.DrawRectangle(pen, rect);
-                g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
-                g.DrawString("You Lost ...", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 -20, rect.Height / 2 * 3-20);
-                g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 -30, rect.Height / 2 * 3+10);
+                DrawDefeatScreen(g);
             }
 
             if (IsVictory)
             {
-                Rectangle rect = new Rectangle(RenderForm.instance.Width / 5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5);
-                Pen pen = new Pen(Color.Black)
-                {
-                    Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
-                };
-                g.DrawRectangle(pen, rect);
-                g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
-                g.DrawString("You Won !", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
-                g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 30, rect.Height / 2 * 3 + 10);
+                DrawVictoryScreen(g);
+            }
+
+            if (IsPaused)
+            {
+                DrawPauseScreen(g);
             }
 
 
@@ -271,6 +260,45 @@ namespace SpaceInvaders
                     g.DrawRectangle(redPen, rect);
                 }
             }
+        }
+
+        public void DrawDefeatScreen(Graphics g)
+        {
+            Rectangle rect = new Rectangle(RenderForm.instance.Width / 5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5);
+            Pen pen = new Pen(Color.Black)
+            {
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+            };
+            g.DrawRectangle(pen, rect);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
+            g.DrawString("You Lost ...", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
+            g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 30, rect.Height / 2 * 3 + 10);
+        }
+
+        public void DrawVictoryScreen(Graphics g)
+        {
+            Rectangle rect = new Rectangle(RenderForm.instance.Width / 5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5);
+            Pen pen = new Pen(Color.Black)
+            {
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+            };
+            g.DrawRectangle(pen, rect);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
+            g.DrawString("You Won !", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
+            g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 30, rect.Height / 2 * 3 + 10);
+        }
+
+        public void DrawPauseScreen(Graphics g)
+        {
+            Rectangle rect = new Rectangle(RenderForm.instance.Width / 5, RenderForm.instance.Height / 5, RenderForm.instance.Width / 5 * 3, RenderForm.instance.Width / 5);
+            Pen pen = new Pen(Color.Black)
+            {
+                Alignment = System.Drawing.Drawing2D.PenAlignment.Inset
+            };
+            g.DrawRectangle(pen, rect);
+            g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
+            g.DrawString("The game is paused", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 90, rect.Height / 2 * 3 - 20);
+            g.DrawString("Press ESCAPE to resume", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 70, rect.Height / 2 * 3 + 20);
         }
 
         public void DrawPlayerLife(Graphics g)
