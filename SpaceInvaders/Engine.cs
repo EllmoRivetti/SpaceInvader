@@ -179,6 +179,11 @@ namespace SpaceInvaders
             }
         }
 
+        public void RenderPlayerLife(Graphics g)
+        {
+
+        }
+
         public void Render(Graphics g)
         {
             foreach(Entity e in EntitiesList)
@@ -187,8 +192,10 @@ namespace SpaceInvaders
                 if (entity != null)
                     ((Renderable)e).Render(g);
             }
+            DrawPlayerLife(g);
+            
 
-            bool showHitBox = true;
+            bool showHitBox = false;
             foreach(CollisionNode col in Engine.instance.NodeListByType[typeof(CollisionNode)])
             {
                 if (showHitBox)
@@ -202,6 +209,11 @@ namespace SpaceInvaders
                     g.DrawRectangle(redPen, rect);
                 }
             }
+        }
+
+        public void DrawPlayerLife(Graphics g)
+        {
+            g.DrawString("Life : " + ((Player)EntitiesList[0]).Life, new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), 10, RenderForm.instance.Height - 75);
         }
 
 

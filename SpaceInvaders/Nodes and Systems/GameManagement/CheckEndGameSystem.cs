@@ -18,8 +18,8 @@ namespace SpaceInvaders.Nodes_and_Systems.GameManagement
         {
             listEnemyNode = Engine.instance.NodeListByType[typeof(MoveEnemyNode)];
             listPlayerNode = Engine.instance.NodeListByType[typeof(MovePlayerNode)];
-            Console.WriteLine("nb enemy = " + listEnemyNode.Count);
-            Console.WriteLine("nb player = " + listPlayerNode.Count);
+            //Console.WriteLine("nb enemy = " + listEnemyNode.Count);
+            //Console.WriteLine("nb player = " + listPlayerNode.Count);
             if (listEnemyNode.Count == 0)
             {
                 Engine.instance.IsVictory = true;

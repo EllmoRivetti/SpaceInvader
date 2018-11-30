@@ -7,15 +7,15 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Bunker : Renderable
+    class Bunker : Collidable
     {
-        public Bunker(Vecteur2D position) : base(Image.FromFile("../../Resources/bunker.png"))
+        public Bunker(Vecteur2D position) : base(Image.FromFile("../../Resources/bunker.png"),CollisionTag.BUNKER)
         {
             TransformComponent BunkerPosition = GetComponent(typeof(TransformComponent)) as TransformComponent;
             BunkerPosition.Position = position;
         }
 
-        public Bunker() : base(Image.FromFile("../../Resources/bunker.png"))
+        public Bunker() : base(Image.FromFile("../../Resources/bunker.png"),CollisionTag.BUNKER)
         {
             TransformComponent BunkerPosition = GetComponent(typeof(TransformComponent)) as TransformComponent;
             BunkerPosition.Position.x = RenderForm.instance.Size.Width * 2 / 3;

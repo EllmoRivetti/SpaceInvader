@@ -36,10 +36,10 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
                 n.ShootComponent.TimeSinceLastShoot += time;
                 //Console.WriteLine("Time since last shoot: "+ n.ShootComponent.TimeSinceLastShoot);
                 //Console.WriteLine("Fire rate: " + n.ShootComponent.FireRate);
-                if (n.ShootComponent.TimeSinceLastShoot > n.ShootComponent.FireRate)
+                if (!Engine.instance.EntitiesList.OfType<PlayerMissile>().Any())
                 {
                     n.ShootComponent.TimeSinceLastShoot = 0;
-                    Vecteur2D posMissile = n.PlayerPosition.Position + new Vecteur2D(15,-24);
+                    Vecteur2D posMissile = n.PlayerPosition.Position + new Vecteur2D(15, -15);
                     PlayerMissile missile = new PlayerMissile(posMissile);
                     Engine.instance.AddEntity(missile);
                 }

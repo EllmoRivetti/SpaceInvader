@@ -11,10 +11,15 @@ namespace SpaceInvaders.Components
     {
         public Image sprite { get; set; }
         public Vecteur2D view { get; set; }
+        public Bitmap Image { get; internal set; }
 
         public RenderComponent(Entity e, Image a) : base(e)
         {
             sprite = a;
+            if(a == null)
+            {
+                throw new Exception("image is null");
+            }
             view = new Vecteur2D();
         }
     }

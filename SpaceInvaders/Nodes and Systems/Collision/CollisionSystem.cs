@@ -1,7 +1,10 @@
-﻿using SpaceInvaders.Nodes;
+﻿using SpaceInvaders.Components;
+using SpaceInvaders.Entities;
+using SpaceInvaders.Nodes;
 using SpaceInvaders.Systems;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using static SpaceInvaders.Entities.Collidable;
@@ -55,16 +58,88 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
 
                     if(CanCollide(node1.HitBoxComponent.tag, node2.HitBoxComponent.tag))
                     {
-                        
                         if (node1.HitBoxComponent.HitBox.Collides(node2.HitBoxComponent.HitBox))
                         {
                             Console.WriteLine("Do collide: " + node1.HitBoxComponent.entity.ToString() + " and " + node2.HitBoxComponent.entity.ToString());
-                            Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
-                            Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+
+                            if(node1.HitBoxComponent.tag == CollisionTag.BUNKER || node2.HitBoxComponent.tag == CollisionTag.BUNKER)
+                            {
+                                Console.WriteLine("has bunker");
+                                if(node1.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                {
+                                    ManageAccurateCollision(node1, node2);
+                                }
+                                else if(node2.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                {
+                                    ManageAccurateCollision(node2, node1);
+                                }  
+                            }
+                            else
+                            {
+                                Console.WriteLine("no bunker");
+                                Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
+                                Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+                            }
                         }
                     }
                 }
             }
         }
+
+        public void ManageAccurateCollision(CollisionNode node1, CollisionNode node2)
+        {
+            Box intersection = GetIntersection(node1.HitBoxComponent.HitBox, node2.HitBoxComponent.HitBox);
+
+            Box relativeHitBox = new Box
+            {
+                X = intersection.X - node1.HitBoxComponent.HitBox.X,
+                Y = intersection.Y - node1.HitBoxComponent.HitBox.Y,
+
+                XPlusWidth = intersection.XPlusWidth - node1.HitBoxComponent.HitBox.X,
+                YPlusHeight = intersection.YPlusHeight - node1.HitBoxComponent.HitBox.Y
+            };
+
+            Console.WriteLine(relativeHitBox.ToString());
+
+            if (ChangeColorToTransparent(node1.RenderComponent, relativeHitBox))
+            {
+                Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+            }
+        }
+
+        public Box GetIntersection(Box box1, Box box2)
+        {
+            Box intersection = new Box
+            {
+                X = Math.Max(box1.X, box2.X),
+                XPlusWidth = Math.Min(box1.XPlusWidth, box2.XPlusWidth),
+
+                Y = Math.Max(box1.Y, box2.Y),
+                YPlusHeight = Math.Min(box1.YPlusHeight, box2.YPlusHeight)
+            };
+
+            return intersection;
+        }
+
+        public static bool ChangeColorToTransparent(RenderComponent renderComponent, Box rectToColor)
+        {
+            Color actualColor;
+            bool bitmapHasChanged = false;
+            for (int i = (int)rectToColor.X; i < (int)rectToColor.XPlusWidth; i++)
+            {
+                for (int j = (int)rectToColor.Y; j < (int)rectToColor.YPlusHeight; j++)
+                {
+                    actualColor = ((Bitmap)renderComponent.sprite).GetPixel(i, j);
+                    if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)
+                    {
+                        ((Bitmap)renderComponent.sprite).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                        bitmapHasChanged = true;
+                    }
+
+                }
+            }
+            return bitmapHasChanged;
+        }
+
     }
 }

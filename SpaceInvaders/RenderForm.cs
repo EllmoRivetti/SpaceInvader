@@ -41,7 +41,7 @@ namespace SpaceInvaders
                 instance = new RenderForm();//TODO Systeme de scene pour gerer la création des entités
             Engine.instance.AddEntity(new Player());
             Engine.instance.AddEntity(new EnemyBlock());
-            Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 1 , RenderForm.instance.Size.Height * 4.6 / 6)));
+            Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 1, RenderForm.instance.Size.Height * 4.6 / 6)));
             Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 2.9 , RenderForm.instance.Size.Height * 4.6 / 6)));
             Engine.instance.AddEntity(new Bunker(new Vecteur2D(((RenderForm.instance.Size.Width - (87 * 3)) / 4) * 4.7 , RenderForm.instance.Size.Height * 4.6 / 6)));
 
@@ -96,6 +96,7 @@ namespace SpaceInvaders
             // 
             this.ClientSize = new System.Drawing.Size(605, 605);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
