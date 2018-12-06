@@ -27,6 +27,9 @@ namespace SpaceInvaders
 
         long lastTime = 0;
 
+        /// <summary>
+        /// Instancie le RenderForm et créé l'objet Game.
+        /// </summary>
         private RenderForm()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace SpaceInvaders
         public static RenderForm CreateRenderForm()
         {
             if (instance == null)
-                instance = new RenderForm();//TODO Systeme de scene pour gerer la création des entités
+                instance = new RenderForm();
             Engine.instance.InstantiateGame();
 
             return instance;
@@ -68,12 +71,6 @@ namespace SpaceInvaders
             Invalidate();
 
         }
-
-        internal bool IsObjectOnScreen(RenderComponent rc)
-        {
-            return !(rc.view.x > instance.Size.Width - rc.sprite.Width || rc.view.y > instance.Size.Height - rc.sprite.Height || rc.view.x < 0 || rc.view.y < 0);
-        }
-
 
         private void InitializeComponent()
         {

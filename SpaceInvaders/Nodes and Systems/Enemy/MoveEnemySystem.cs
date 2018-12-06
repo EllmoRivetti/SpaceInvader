@@ -34,7 +34,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
                     foreach (MoveEnemyNode no in listNode)
                     {
                         no.TransformComponent.Position.y += 25;
-                        no.VelocityComponent.Velocity.x += 5; //augmente la velocité des ennemis a chaque descente de ligne
+                        no.VelocityComponent.Velocity.x += 4; //augmente la velocité des ennemis a chaque descente de ligne
                         no.toLeft = false;
                     }
                 }
@@ -44,7 +44,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
                     foreach (MoveEnemyNode no in listNode)
                     {
                         no.TransformComponent.Position.y += 25;
-                        no.VelocityComponent.Velocity.x += 5; //augmente la velocité des ennemis a chaque descente de ligne
+                        no.VelocityComponent.Velocity.x += 4; //augmente la velocité des ennemis a chaque descente de ligne
                         no.toLeft = true;
                     }
                 }

@@ -10,30 +10,6 @@ namespace SpaceInvaders
 {
     class Game
     {
-
-        #region GameObjects management
-        /// <summary>
-        /// Set of all game objects currently in the game
-        /// </summary>
-        public HashSet<GameObject> gameObjects = new HashSet<GameObject>();
-
-        /// <summary>
-        /// Set of new game objects scheduled for addition to the game
-        /// </summary>
-        private HashSet<GameObject> pendingNewGameObjects = new HashSet<GameObject>();
-
-        /// <summary>
-        /// Schedule a new object for addition in the game.
-        /// The new object will be added at the beginning of the next update loop
-        /// </summary>
-        /// <param name="gameObject">object to add</param>
-        public void AddNewGameObject(GameObject gameObject)
-        {
-            pendingNewGameObjects.Add(gameObject);
-        }
-        #endregion
-
-        #region game technical elements
         /// <summary>
         /// Size of the game area
         /// </summary>
@@ -44,7 +20,6 @@ namespace SpaceInvaders
         /// </summary>
         public HashSet<Keys> keyPressed = new HashSet<Keys>();
 
-        #endregion
 
         #region static fields (helpers)
 
@@ -80,7 +55,7 @@ namespace SpaceInvaders
         }
 
         /// <summary>
-        /// Private constructor
+        /// Créé l'objet game puis créé l'engine
         /// </summary>
         /// <param name="gameSize">Size of the game area</param>
         private Game(Size gameSize)

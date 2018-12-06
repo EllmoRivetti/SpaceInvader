@@ -74,11 +74,10 @@
     <Compile Include="Entities\Player.cs" />
     <Compile Include="Entities\Renderable.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="GameObject.cs" />
     <Compile Include="Nodes and Systems\Collision\CollisionNode.cs" />
     <Compile Include="Nodes and Systems\Collision\CollisionSystem.cs" />
-    <Compile Include="Nodes and Systems\Ennemy\MoveEnemyNode.cs" />
-    <Compile Include="Nodes and Systems\Ennemy\MoveEnemySystem.cs" />
+    <Compile Include="Nodes and Systems\Enemy\MoveEnemyNode.cs" />
+    <Compile Include="Nodes and Systems\Enemy\MoveEnemySystem.cs" />
     <Compile Include="Nodes and Systems\GameManagement\CheckEndGameSystem.cs" />
     <Compile Include="Nodes and Systems\Missile\MoveMissileNode.cs" />
     <Compile Include="Nodes and Systems\Missile\MoveMissileSystem.cs" />
