@@ -19,7 +19,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
             ShootComponent = (ShootComponent)e.GetComponent(typeof(ShootComponent));
         }
 
-        public new static bool ToCreate(Entity e) => e.GetType() == typeof(SpaceInvaders.Entities.Enemy);
-
+        //public new static bool ToCreate(Entity e) => e.GetType() == typeof(SpaceInvaders.Entities.Enemy);
+        public new static bool ToCreate(Entity e) => e is Enemy;
     }
 }

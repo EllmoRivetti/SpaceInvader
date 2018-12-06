@@ -22,22 +22,15 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
         {
             
             listNode = Engine.instance.NodeListByType[typeof(ShootEnemyNode)];
-            //Console.WriteLine("nb node: " + listNode.Count());
             foreach (ShootEnemyNode n in listNode)
             {
                 n.ShootComponent.TimeSinceLastShoot += time;
-                //Console.WriteLine("n.ShootComponent.TimeSinceLastShoot: " + n.ShootComponent.TimeSinceLastShoot);
-                //Console.WriteLine("n.ShootComponent.FireRate " + n.ShootComponent.FireRate);
                 if (n.ShootComponent.TimeSinceLastShoot >= n.ShootComponent.FireRate)
                 {
                     
-                    int probabilty = this.random.Next(0, 200000);//Changer le maximum pour diminuer la proba de tirer
-                    //Console.WriteLine("---");
-                    //Console.WriteLine("proba = " + probabilty);
-                    //Console.WriteLine("nextShoot = " + n.ShootComponent.NextShootProbability);
+                    int probabilty = this.random.Next(0, 200000);//Changer le maximum pour diminuer la proba de tirer 
                     if (probabilty < n.ShootComponent.NextShootProbability)
                     {
-                        //Console.WriteLine("Shoot");
                         n.ShootComponent.NextShootProbability = n.ShootComponent.ShootBaseProbability;
                         n.ShootComponent.TimeSinceLastShoot = 0;
                         Vecteur2D posMissile = n.EnemyPosition.Position + new Vecteur2D(15, 24);
@@ -46,7 +39,6 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
                     }
                     else
                     {
-                        //Console.WriteLine("Increm");
                         n.ShootComponent.NextShootProbability += 1;
                     }
                 }

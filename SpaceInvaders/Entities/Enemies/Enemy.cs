@@ -7,9 +7,10 @@ using System.Text;
 
 namespace SpaceInvaders.Entities
 {
-    class Enemy:Collidable
+    abstract class Enemy:Collidable
     {
-        public Enemy() : base(Image.FromFile("../../Resources/ship2.png"), CollisionTag.ENEMY)
+
+        public Enemy(Image image) : base(image, CollisionTag.ENEMY)
         {
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
@@ -23,6 +24,18 @@ namespace SpaceInvaders.Entities
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
             startPos.Position.y = y;
             startPos.Position.x = x;
+        }
+
+        public enum EnemyTag
+        {
+            ALIEN =0,
+            UFO,
+            SQUID1,
+            SQUID2,
+            SQUARE,
+            ARMS1,
+            ARMS2,
+            TELY
         }
 
     }

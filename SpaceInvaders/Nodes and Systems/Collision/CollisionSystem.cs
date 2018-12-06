@@ -31,7 +31,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.ENEMYMISSILE, true);
             SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.PLAYERMISSILE, true);
             SetTruthTableComponent(CollisionTag.ENEMYMISSILE, CollisionTag.PLAYERMISSILE, true);
-            SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.ENEMY, true);
+            //SetTruthTableComponent(CollisionTag.BUNKER, CollisionTag.ENEMY, true);//Permet d'ajouter la collision entre les ennemis et les bunkers. Si elle est activée, les ennemis detruiront les bunkers sans etre détruits quand ils passeront dessus
+            SetTruthTableComponent(CollisionTag.ENEMY, CollisionTag.PLAYER, true);
         }
 
         private void SetTruthTableComponent(CollisionTag tag1, CollisionTag tag2, bool result)
@@ -77,7 +78,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
                             }
                             else if(node1.HitBoxComponent.tag == CollisionTag.PLAYER || node2.HitBoxComponent.tag == CollisionTag.PLAYER)
                             {
-                                ManagePlayerMissileColision(node1, node2);
+                                ManagePlayerCollision(node1, node2);
                             }
                             else
                             {
@@ -91,9 +92,33 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             }
         }
 
-        public void ManagePlayerMissileColision(CollisionNode node1, CollisionNode node2)
+        public void ManagePlayerCollision(CollisionNode node1, CollisionNode node2)
         {
-            Console.WriteLine("has player");
+            if(node1.HitBoxComponent.tag == CollisionTag.ENEMY || node2.HitBoxComponent.tag == CollisionTag.ENEMY)
+            {
+                ManageEnemyPlayerCollision(node1, node2);
+            }
+           else
+            {
+                ManageMissilePlayerColision(node1, node2);
+             }
+        }
+
+
+        public void ManageEnemyPlayerCollision(CollisionNode node1, CollisionNode node2)
+        {
+            if (node1.HitBoxComponent.tag == CollisionTag.PLAYER)
+            {
+                ((SpaceInvaders.Entities.Player)node1.HitBoxComponent.entity).Life = 0;
+            }
+            else if (node2.HitBoxComponent.tag == CollisionTag.PLAYER)
+            {
+                ((SpaceInvaders.Entities.Player)node2.HitBoxComponent.entity).Life = 0;
+            }
+        }
+
+        public void ManageMissilePlayerColision(CollisionNode node1, CollisionNode node2)
+        {
             if (node1.HitBoxComponent.tag == CollisionTag.PLAYER)
             {
                 DecreasePlayerLife(node1);
@@ -105,6 +130,8 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
                 Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
             }
         }
+
+
 
 
         public void DecreasePlayerLife(CollisionNode nodePlayer)

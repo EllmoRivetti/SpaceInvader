@@ -24,7 +24,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
             RenderComponent = (RenderComponent)e.GetComponent(typeof(RenderComponent));
         }
 
-        public new static bool ToCreate(Entity e) => e.GetType() == typeof(Enemy);
-
+        //public new static bool ToCreate(Entity e) => e.GetType() == typeof(Enemy);
+        public new static bool ToCreate(Entity e) => e is Enemy;
     }
 }
