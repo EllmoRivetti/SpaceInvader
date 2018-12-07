@@ -1,5 +1,6 @@
 ﻿using SpaceInvaders.Components;
 using SpaceInvaders.Entities;
+using SpaceInvaders.Entities.Missiles;
 using SpaceInvaders.Nodes;
 using SpaceInvaders.Systems;
 using System;
@@ -15,16 +16,15 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
     {
         private bool[,] TruthTableCollision;
         private List<Node> listNode;
+        private int EnlargedWidthHitbox;
         public CollisionSystem()
         {
-            Console.WriteLine("CREATE COLLISION SYSTEM");
+            EnlargedWidthHitbox = 2;
             CreateTruthTable();
-            Console.WriteLine("END CREATION");
         }
 
         private void CreateTruthTable()
         {
-            Console.WriteLine("CREATE TRUTH TABLE");
             TruthTableCollision = new bool[Enum.GetNames(typeof(CollisionTag)).Length, Enum.GetNames(typeof(CollisionTag)).Length];
             SetTruthTableComponent(CollisionTag.PLAYER,CollisionTag.ENEMYMISSILE,true);
             SetTruthTableComponent(CollisionTag.ENEMY, CollisionTag.PLAYERMISSILE, true);
@@ -37,7 +37,6 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
 
         private void SetTruthTableComponent(CollisionTag tag1, CollisionTag tag2, bool result)
         {
-            Console.WriteLine("SET COMPONENT");
             TruthTableCollision[(int)tag1, (int)tag2] = result;
             TruthTableCollision[(int)tag2, (int)tag1] = result;
         }
@@ -50,41 +49,36 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
         public void Update(double time)
         {
             listNode = Engine.instance.NodeListByType[typeof(CollisionNode)];
-            RenderForm.instance.Text = listNode.Count.ToString();
             for (int idFirstNode = 0; idFirstNode < listNode.Count; idFirstNode++)
             {
                 for (int idSecondNode = 0; idSecondNode < listNode.Count; idSecondNode++)
                 {
-                    CollisionNode node1 = (CollisionNode)listNode[idFirstNode];
-                    CollisionNode node2 = (CollisionNode)listNode[idSecondNode];
-
-                    if(CanCollide(node1.HitBoxComponent.tag, node2.HitBoxComponent.tag))
+                    if(idFirstNode < listNode.Count && listNode[idFirstNode] is CollisionNode node1 && idSecondNode < listNode.Count && listNode[idSecondNode] is CollisionNode node2)
                     {
-                        if (node1.HitBoxComponent.HitBox.Collides(node2.HitBoxComponent.HitBox))
+                        if (CanCollide(node1.HitBoxComponent.tag, node2.HitBoxComponent.tag))
                         {
-                            Console.WriteLine("Do collide: " + node1.HitBoxComponent.entity.ToString() + " and " + node2.HitBoxComponent.entity.ToString());
-
-                            if(node1.HitBoxComponent.tag == CollisionTag.BUNKER || node2.HitBoxComponent.tag == CollisionTag.BUNKER)
+                            if (node1.HitBoxComponent.HitBox.Collides(node2.HitBoxComponent.HitBox))
                             {
-                                Console.WriteLine("has bunker");
-                                if(node1.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                if (node1.HitBoxComponent.tag == CollisionTag.BUNKER || node2.HitBoxComponent.tag == CollisionTag.BUNKER)
                                 {
-                                    ManageAccurateCollision(node1, node2);
+                                    if (node1.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                    {
+                                        ManageAccurateCollision(node1, node2);
+                                    }
+                                    else if (node2.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                    {
+                                        ManageAccurateCollision(node2, node1);
+                                    }
                                 }
-                                else if(node2.HitBoxComponent.tag == CollisionTag.BUNKER)
+                                else if (node1.HitBoxComponent.tag == CollisionTag.PLAYER || node2.HitBoxComponent.tag == CollisionTag.PLAYER)
                                 {
-                                    ManageAccurateCollision(node2, node1);
-                                }  
-                            }
-                            else if(node1.HitBoxComponent.tag == CollisionTag.PLAYER || node2.HitBoxComponent.tag == CollisionTag.PLAYER)
-                            {
-                                ManagePlayerCollision(node1, node2);
-                            }
-                            else
-                            {
-                                Console.WriteLine("no bunker");
-                                Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
-                                Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+                                    ManagePlayerCollision(node1, node2);
+                                }
+                                else
+                                {
+                                    Engine.instance.RemoveEntity(node1.HitBoxComponent.entity);
+                                    Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+                                }
                             }
                         }
                     }
@@ -98,10 +92,10 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             {
                 ManageEnemyPlayerCollision(node1, node2);
             }
-           else
+            else
             {
                 ManageMissilePlayerColision(node1, node2);
-             }
+            }
         }
 
 
@@ -139,26 +133,36 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             ((SpaceInvaders.Entities.Player)nodePlayer.HitBoxComponent.entity).Life--;
         }
 
-        public void ManageAccurateCollision(CollisionNode node1, CollisionNode node2)
+        public void ManageAccurateCollision(CollisionNode bunkerCollisionNode, CollisionNode missileCollisionNode)
         {
-            Box intersection = GetIntersection(node1.HitBoxComponent.HitBox, node2.HitBoxComponent.HitBox);
+            Box intersection = GetIntersection(bunkerCollisionNode.HitBoxComponent.HitBox, missileCollisionNode.HitBoxComponent.HitBox);
 
             Box relativeHitBox = new Box
             {
-                X = intersection.X - node1.HitBoxComponent.HitBox.X,
-                Y = intersection.Y - node1.HitBoxComponent.HitBox.Y,
+                X = Clamp(intersection.X - bunkerCollisionNode.HitBoxComponent.HitBox.X - EnlargedWidthHitbox, 0, bunkerCollisionNode.RenderComponent.sprite.Width),
+                Y = Clamp(intersection.Y - bunkerCollisionNode.HitBoxComponent.HitBox.Y , 0, bunkerCollisionNode.RenderComponent.sprite.Height),
 
-                XPlusWidth = intersection.XPlusWidth - node1.HitBoxComponent.HitBox.X,
-                YPlusHeight = intersection.YPlusHeight - node1.HitBoxComponent.HitBox.Y
+                XPlusWidth = Clamp(intersection.XPlusWidth - bunkerCollisionNode.HitBoxComponent.HitBox.X + EnlargedWidthHitbox, 0, bunkerCollisionNode.RenderComponent.sprite.Width),
+                YPlusHeight = Clamp(intersection.YPlusHeight - bunkerCollisionNode.HitBoxComponent.HitBox.Y , 0, bunkerCollisionNode.RenderComponent.sprite.Height)
             };
 
-            Console.WriteLine(relativeHitBox.ToString());
-
-            if (ChangeColorToTransparent(node1.RenderComponent, relativeHitBox))
+            if (ManagePixelCollisionsBunker(bunkerCollisionNode.RenderComponent, relativeHitBox, missileCollisionNode))
             {
-                if(node2.HitBoxComponent.tag != CollisionTag.ENEMY)
-                    Engine.instance.RemoveEntity(node2.HitBoxComponent.entity);
+                if(missileCollisionNode.HitBoxComponent.tag != CollisionTag.ENEMY)
+                    Engine.instance.RemoveEntity(missileCollisionNode.HitBoxComponent.entity);
             }
+        }
+
+        public static double Clamp(double valeur,double debut, double fin)
+        {
+            if(valeur < debut)
+            {
+                valeur = debut;
+            }else if(valeur > fin)
+            {
+                valeur = fin;
+            }
+            return valeur;
         }
 
         public Box GetIntersection(Box box1, Box box2)
@@ -175,24 +179,31 @@ namespace SpaceInvaders.Nodes_and_Systems.Collision
             return intersection;
         }
 
-        public static bool ChangeColorToTransparent(RenderComponent renderComponent, Box rectToColor)
+        public static bool ManagePixelCollisionsBunker(RenderComponent renderComponent, Box rectToColor, CollisionNode missileCollisionNode)
         {
             Color actualColor;
-            bool bitmapHasChanged = false;
+            MissileAbs missileEntity = missileCollisionNode.HitBoxComponent.entity as MissileAbs;
             for (int i = (int)rectToColor.X; i < (int)rectToColor.XPlusWidth; i++)
             {
                 for (int j = (int)rectToColor.Y; j < (int)rectToColor.YPlusHeight; j++)
                 {
                     actualColor = ((Bitmap)renderComponent.sprite).GetPixel(i, j);
-                    if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)
-                    {
-                        ((Bitmap)renderComponent.sprite).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
-                        bitmapHasChanged = true;
-                    }
 
+                    if(missileEntity.NbPixelToDestroy > 0)
+                    {
+                        if (actualColor.A == 255 && actualColor.R == 0 && actualColor.B == 0 && actualColor.G == 0)
+                        {
+                            ((Bitmap)renderComponent.sprite).SetPixel(i, j, Color.FromArgb(0, 0, 0, 0));
+                            missileEntity.NbPixelToDestroy--;
+                        }
+                    }
+                    else
+                    {
+                        return true;
+                    }
                 }
             }
-            return bitmapHasChanged;
+            return false;
         }
 
     }

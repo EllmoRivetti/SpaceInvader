@@ -93,7 +93,7 @@ namespace SpaceInvaders
             NodeListByType = new Dictionary<Type, List<Node>>();
             NodeListByEntity = new Dictionary<Entity, List<Node>>();
 
-            nodeTypes = typeof(Node)
+            nodeTypes = typeof(Node)//Fait grâce à ce topic sur Stackoverflow https://stackoverflow.com/a/11840189
                 .Assembly
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(Node)));
@@ -109,8 +109,6 @@ namespace SpaceInvaders
 
             //Ici on créé tous les systems
             AddSystems();
-
-            //TODO Gérer les entities selon les scènes
         }
 
         /// <summary>
@@ -311,8 +309,7 @@ namespace SpaceInvaders
         {
             foreach(Entity e in EntitiesList)
             {
-                var entity = e as Renderable;
-                if (entity != null)
+                if (e is Renderable entity)
                     ((Renderable)e).Render(g);
             }
             DrawPlayerLife(g);
@@ -374,7 +371,7 @@ namespace SpaceInvaders
             };
             g.DrawRectangle(pen, rect);
             g.FillRectangle(new SolidBrush(Color.FromArgb(247, 247, 247, 255)), rect);
-            g.DrawString("You Lost ...", new System.Drawing.Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
+            g.DrawString("You Lost ...", new Font("Arial", 24), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 20, rect.Height / 2 * 3 - 20);
             g.DrawString("Press R to restart", new System.Drawing.Font("Arial", 16), new System.Drawing.SolidBrush(System.Drawing.Color.Black), rect.Width / 3 * 2 - 30, rect.Height / 2 * 3 + 10);
         }
 

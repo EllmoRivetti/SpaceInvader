@@ -9,6 +9,8 @@ namespace SpaceInvaders.Entities.Missiles
 {
     class EnemyMissile:MissileAbs
     {
+
+       
         public EnemyMissile(Vecteur2D origin) : base(origin,Image.FromFile("../../Resources/shoot1.png"), CollisionTag.ENEMYMISSILE)
         {
             TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
