@@ -18,6 +18,12 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
 
             foreach (MoveEnemyNode n in listNode)
             {
+
+                if (n.TransformComponent.Position.y >= RenderForm.instance.Size.Height * 5.2 / 6)
+                {
+                    Engine.instance.IsDefeat = true;
+                }
+
                 Vecteur2D movementVector = new Vecteur2D();
                 if (n.toLeft)
                 {

@@ -34,3 +34,12 @@ C:\Users\Billy\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.
 C:\Users\Billy\Documents\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb
 C:\Users\Billy\Documents\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.exe
 C:\Users\Billy\Documents\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.exe
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\bin\Debug\SpaceInvaders.pdb
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csprojAssemblyReference.cache
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.Properties.Resources.resources
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.RenderForm.resources
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.GenerateResource.cache
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.csproj.CoreCompileInputs.cache
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.exe
+C:\Users\er788\Documents\GitHub\SpaceInvader\SpaceInvaders\obj\x86\Debug\SpaceInvaders.pdb
