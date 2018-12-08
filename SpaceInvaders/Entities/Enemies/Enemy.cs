@@ -12,7 +12,7 @@ namespace SpaceInvaders.Entities
 
         public Enemy(Image image) : base(image, CollisionTag.ENEMY)
         {
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
             velocity.Velocity.x = 50;
             ShootComponent shootStat = new ShootComponent(this,0.2,1,0.5);
@@ -21,7 +21,7 @@ namespace SpaceInvaders.Entities
 
         public void SetStartPos(double x , double y)
         {
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             startPos.Position.y = y;
             startPos.Position.x = x;
         }

@@ -10,7 +10,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
 {
     class MoveEnemyNode : Node
     {
-        public TransformComponent TransformComponent { get; set; }
+        public PositionComponent TransformComponent { get; set; }
         public VelocityComponent VelocityComponent { get; set; }
         public RenderComponent RenderComponent { get; set; }
 
@@ -19,7 +19,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
         public MoveEnemyNode(Entity e)
         {
             toLeft = true;
-            TransformComponent = (TransformComponent)e.GetComponent(typeof(TransformComponent));
+            TransformComponent = (PositionComponent)e.GetComponent(typeof(PositionComponent));
             VelocityComponent = (VelocityComponent)e.GetComponent(typeof(VelocityComponent));
             RenderComponent = (RenderComponent)e.GetComponent(typeof(RenderComponent));
         }

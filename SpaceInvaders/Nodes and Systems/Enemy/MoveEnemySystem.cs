@@ -19,7 +19,7 @@ namespace SpaceInvaders.Nodes_and_Systems.Ennemy
             foreach (MoveEnemyNode n in listNode)
             {
 
-                if (n.TransformComponent.Position.y >= RenderForm.instance.Size.Height * 5.2 / 6)
+                if (n.TransformComponent.Position.y >= (RenderForm.instance.Size.Height * 5.2 / 6)-30)
                 {
                     Engine.instance.IsDefeat = true;
                 }

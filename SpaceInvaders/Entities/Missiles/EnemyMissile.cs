@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities.Missiles
        
         public EnemyMissile(Vecteur2D origin) : base(origin,Image.FromFile("../../Resources/shoot1.png"), CollisionTag.ENEMYMISSILE)
         {
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             startPos.Position = origin;
         }
     }

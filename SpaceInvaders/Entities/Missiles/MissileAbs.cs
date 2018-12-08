@@ -13,7 +13,7 @@ namespace SpaceInvaders.Entities
         public MissileAbs(Vecteur2D origin, Image img, CollisionTag tag) : base(img,tag)
         {
             NbPixelToDestroy = 14;
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;
         }
     }

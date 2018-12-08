@@ -9,13 +9,13 @@ namespace SpaceInvaders.Nodes
 {
     class MovePlayerNode : Node
     {  
-        public TransformComponent TransformComponent { get; set; }
+        public PositionComponent TransformComponent { get; set; }
         public VelocityComponent VelocityComponent { get; set; }
         public RenderComponent RenderComponent { get; set; }
 
         public MovePlayerNode(Entity e)
         {
-            TransformComponent = (TransformComponent)e.GetComponent(typeof(TransformComponent));
+            TransformComponent = (PositionComponent)e.GetComponent(typeof(PositionComponent));
             VelocityComponent = (VelocityComponent)e.GetComponent(typeof(VelocityComponent));
             RenderComponent = (RenderComponent)e.GetComponent(typeof(RenderComponent));
         }

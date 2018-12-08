@@ -11,7 +11,7 @@ namespace SpaceInvaders.Entities.Missiles
     {
         public PlayerMissile(Vecteur2D origin) : base(origin,Image.FromFile("../../Resources/shoot2.png"), CollisionTag.PLAYERMISSILE)
         {
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             startPos.Position = origin;
         }
     }

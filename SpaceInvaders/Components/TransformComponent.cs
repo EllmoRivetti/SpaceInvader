@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SpaceInvaders.Components
 {
-    class TransformComponent:Component
+    class PositionComponent:Component
     {
         private Vecteur2D position;
         public Vecteur2D Position
@@ -38,7 +38,7 @@ namespace SpaceInvaders.Components
         }
         public Vecteur2D LocalScale;
 
-        public TransformComponent(Entity e) : base(e)
+        public PositionComponent(Entity e) : base(e)
         {
             position = new Vecteur2D();
             LocalScale = new Vecteur2D();

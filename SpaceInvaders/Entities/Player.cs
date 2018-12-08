@@ -12,7 +12,7 @@ namespace SpaceInvaders.Entities
         public int Life { get; set; }
         public Player():base(Image.FromFile("../../Resources/ship1.png"),CollisionTag.PLAYER)
         {
-            TransformComponent startPos = GetComponent(typeof(TransformComponent)) as TransformComponent;
+            PositionComponent startPos = GetComponent(typeof(PositionComponent)) as PositionComponent;
             startPos.Position.y = RenderForm.instance.Size.Height * 5.2 / 6;
             startPos.Position.x = RenderForm.instance.Size.Width / 2;
             VelocityComponent velocity = GetComponent(typeof(VelocityComponent)) as VelocityComponent;

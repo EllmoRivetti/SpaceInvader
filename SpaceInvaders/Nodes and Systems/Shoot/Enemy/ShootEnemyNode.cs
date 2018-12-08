@@ -10,12 +10,12 @@ namespace SpaceInvaders.Nodes_and_Systems.Shoot
 {
     class ShootEnemyNode : Node
     {
-        public TransformComponent EnemyPosition { get; set; }
+        public PositionComponent EnemyPosition { get; set; }
         public ShootComponent ShootComponent { get; set; }
 
         public ShootEnemyNode(Entity e)
         {
-            EnemyPosition = (TransformComponent)e.GetComponent(typeof(TransformComponent));
+            EnemyPosition = (PositionComponent)e.GetComponent(typeof(PositionComponent));
             ShootComponent = (ShootComponent)e.GetComponent(typeof(ShootComponent));
         }
 

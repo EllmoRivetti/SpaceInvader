@@ -14,7 +14,7 @@ namespace SpaceInvaders.Entities
         public Entity()
         {
             ListComp = new Dictionary<Type, Component>();
-            AddComponent(new TransformComponent(this));
+            AddComponent(new PositionComponent(this));
         }
         
         public void AddComponent(Component c)
